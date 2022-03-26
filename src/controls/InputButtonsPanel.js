@@ -6,7 +6,7 @@ class InputButtonsPanel extends React.Component {
     constructor(props) {
         super(props);
 
-        this.inputButtonSymbols = ['π', 'σ', 'ρ', '⋈', '⟕', '⟖', '⟗', '⋉', '⋊', '▷', '◁', '∧', '∨', '¬', '≠', '≥', '≤', '∩', '∪', '\\', '÷', '⨯', '→', '*', '⟨', '⟩'];
+        this.inputButtonSymbols = ['π', 'σ', 'ρ', '⋈', '⟕', '⟖', '⟗', '⋉', '⋊', '▷', '◁', '∧', '∨', '¬', '≥', '≤', '∩', '∪', '\\', '÷', '⨯', '→', '*', '⟨', '⟩'];
     }
 
     render() {

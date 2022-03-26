@@ -1,7 +1,6 @@
 import React from 'react';
-import {convertToRaw, Editor, EditorState, getDefaultKeyBinding, Modifier, RichUtils} from 'draft-js';
+import {convertToRaw, Editor, EditorState, getDefaultKeyBinding, Modifier, RichUtils, CompositeDecorator} from 'draft-js';
 import 'draft-js/dist/Draft.css';
-import InputButton from "./controls/InputButton";
 import PropTypes from 'prop-types';
 import SavedQuery from "./SavedQuery";
 import SaveQueryButton from "./controls/SaveQueryButton";
@@ -13,8 +12,51 @@ class RichTextEditor extends React.Component {
     constructor(props) {
         super(props);
 
+        const RA_OPERATORS = ['π', 'σ', 'ρ', '∩', '∪', '\\\\', '÷', '⨯', '▷', '◁', '⋈', '⟕', '⟖', '⟗', '⋉', '⋊', '<\\*', '\\*>', '\\*', '⟨', '⟩', '\\[', '\\]'];
+
+        const LOGICAL_OPERATORS = ['∧', '∨', '¬', '≥', '≤', '<', '>', '='];
+
+        function findWithRegex(words, contentBlock, callback) {
+            const text = contentBlock.getText();
+
+            words.forEach(word => {
+                const matches = [...text.matchAll(word)];
+                matches.forEach(match =>
+                    callback(match.index, match.index + match[0].length)
+                );
+            });
+        }
+
+        function RelationalAlgebraStrategy(contentBlock, callback) {
+            findWithRegex(RA_OPERATORS, contentBlock, callback);
+        }
+
+        function LogicalExpressionsStrategy(contentBlock, callback) {
+            findWithRegex(LOGICAL_OPERATORS, contentBlock, callback);
+        }
+
+        const RelationalAlgebraDecorator = ({ children }) => {
+            return <span style={{ color: "purple"}}>{children}</span>;
+        };
+
+        const LogicalOperatorDecorator = ({ children }) => {
+            return <span style={{ color: "#407ee7"}}>{children}</span>;
+        };
+
+        const compositeDecorator =
+            new CompositeDecorator([
+                {
+                    strategy: RelationalAlgebraStrategy,
+                    component: RelationalAlgebraDecorator
+                },
+                {
+                    strategy: LogicalExpressionsStrategy,
+                    component: LogicalOperatorDecorator
+                }
+            ]);
+
         this.state = {
-            editorState: EditorState.createEmpty(),
+            editorState: EditorState.createEmpty(compositeDecorator),
             latexTextFieldContent: "",
             savedQueries: JSON.parse(localStorage.getItem('savedQueries')) || []
         };
@@ -42,6 +84,12 @@ class RichTextEditor extends React.Component {
 
         this.lastHitKey = 4;
         this.editorRef = React.createRef();
+
+        this.styleMap = {
+            'HIGHLIGHT_OPERATOR': {
+                'backgroundColor': '#faed27',
+            }
+        };
     }
 
     componentDidMount() {
