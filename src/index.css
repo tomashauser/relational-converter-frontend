@@ -1,103 +1,215 @@
 @import url("https://fonts.googleapis.com/css?family=Niramit");
 
 :root {
-  --input-color: #f0f0f0;
-  --controls-color: var(--input-color);
-  --query-view-color: var(--input-color);
-  --denim: #1a2930;
-  --box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
-  --border-radius-main: 0px;
-  --border-radius-secondary: 0px;
-  --light-blue: #0072bb; /*To prvni je CVUT barva, to druhe vic vibrance #0073cf; */
-  --element-width: 80vw;
-  --body-color: #30548a;
-  --convert-button-height: 4rem;
-  --notation-switch-height: 3rem;
-  --convert-button-gap: 0.3em;
-  --light-blue-hover: #0067ab;
-  --almost-white-gradient: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 20%, rgb(255, 255, 255) 82%, rgb(255, 255, 255) 97%);
+    --input-color: #f0f0f0;
+    --controls-color: var(--input-color);
+    --query-view-color: var(--input-color);
+    --denim: #1a2930;
+    --box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    --border-radius-main: 0px;
+    --border-radius-secondary: 0px;
+    --light-blue: #0072bb; /*To prvni je CVUT barva, to druhe vic vibrance #0073cf; */
+    --element-width: 80vw;
+    --body-color: #30548a;
+    --convert-button-height: 4rem;
+    --notation-switch-height: 3rem;
+    --convert-button-gap: 0.3em;
+    --light-blue-hover: #0067ab;
+    --almost-white-gradient: linear-gradient(90deg, rgb(255, 255, 255) 0%, rgb(255, 255, 255) 20%, rgb(255, 255, 255) 82%, rgb(255, 255, 255) 97%);
 }
 
 button {
-  font-family: inherit;
+    font-family: inherit;
 }
 
 .controls-label {
-  position: absolute;
-  color: white;
-  font-size: 1.25rem;
-  top: -2em;
+    position: absolute;
+    color: white;
+    font-size: 1.25rem;
+    top: -2em;
 }
 
-.katex-display > .katex { white-space: normal }
+.katex-display > .katex {
+    white-space: normal
+}
+
 /* Add space between broken lines: */
-.katex-display > .base { margin: 0.25em 0 }
+.katex-display > .base {
+    margin: 0.25em 0
+}
+
 /* Compensate by reducing space around display math */
-.katex-display { margin: 0.5em 0; }
+.katex-display {
+    margin: 0.5em 0;
+}
 
 body {
-  background: var(--body-color);
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    background: var(--body-color);
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  padding-top: 8px;
-  padding-bottom: 8vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: 8px;
+    padding-bottom: 8vh;
 }
 
 .app-wrapper {
-  display: flex;
-  width: 80vw;
-  flex-direction: column;
-  gap: 64px;
-  margin-left: auto;
-  margin-right: auto;
+    display: flex;
+    width: 80vw;
+    flex-direction: column;
+    gap: 64px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .tables-panel {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
 
 .error-field {
-  color: red;
-  display: flex;
-  justify-content: center;
+    color: red;
+    display: flex;
+    justify-content: center;
 }
 
 .converted-text {
-  display: flex;
-  border: black solid 1px;
-  width: 120px;
-  height: 25px;
-  color: black;
-  overflow: hidden;
-  padding: 2px;
+    display: flex;
+    border: black solid 1px;
+    width: 120px;
+    height: 25px;
+    color: black;
+    overflow: hidden;
+    padding: 2px;
 }
 
 .converted-text:hover {
-  display: flex;
-  align-self: center;
-  width: fit-content;
+    display: flex;
+    align-self: center;
+    width: fit-content;
 }
 
 .query-view:first-of-type {
-  margin-top: 12px;
+    margin-top: 12px;
 }
 
 .RichEditor-root {
-  font-family: "Computer Modern Sans", sans-serif;
-  font-size: 14px;
-  box-shadow: var(--box-shadow);
-  color: #1a2930;
-  padding: 0 15px 0 15px;
-  position: relative;
+    font-family: "Computer Modern Sans", sans-serif;
+    font-size: 14px;
+    box-shadow: var(--box-shadow);
+    color: #1a2930;
+    padding: 0 15px 0 15px;
+    position: relative;
+}
+
+.lds-roller {
+    display: inline-block;
+    position: relative;
+    width: 80px;
+    height: 80px;
+}
+
+.lds-roller div {
+    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 40px 40px;
+}
+
+.lds-roller div:after {
+    content: " ";
+    display: block;
+    position: absolute;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: black;
+    margin: -4px 0 0 -4px;
+}
+
+.lds-roller div:nth-child(1) {
+    animation-delay: -0.036s;
+}
+
+.lds-roller div:nth-child(1):after {
+    top: 63px;
+    left: 63px;
+}
+
+.lds-roller div:nth-child(2) {
+    animation-delay: -0.072s;
+}
+
+.lds-roller div:nth-child(2):after {
+    top: 68px;
+    left: 56px;
+}
+
+.lds-roller div:nth-child(3) {
+    animation-delay: -0.108s;
+}
+
+.lds-roller div:nth-child(3):after {
+    top: 71px;
+    left: 48px;
+}
+
+.lds-roller div:nth-child(4) {
+    animation-delay: -0.144s;
+}
+
+.lds-roller div:nth-child(4):after {
+    top: 72px;
+    left: 40px;
+}
+
+.lds-roller div:nth-child(5) {
+    animation-delay: -0.18s;
+}
+
+.lds-roller div:nth-child(5):after {
+    top: 71px;
+    left: 32px;
+}
+
+.lds-roller div:nth-child(6) {
+    animation-delay: -0.216s;
+}
+
+.lds-roller div:nth-child(6):after {
+    top: 68px;
+    left: 24px;
+}
+
+.lds-roller div:nth-child(7) {
+    animation-delay: -0.252s;
+}
+
+.lds-roller div:nth-child(7):after {
+    top: 63px;
+    left: 17px;
+}
+
+.lds-roller div:nth-child(8) {
+    animation-delay: -0.288s;
+}
+
+.lds-roller div:nth-child(8):after {
+    top: 56px;
+    left: 12px;
+}
+
+@keyframes lds-roller {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }

@@ -4,6 +4,7 @@ import styled from "styled-components";
 import katex from "katex/dist/katex.mjs";
 import upArrow from "./images/up-arrow.png";
 import copyIcon from "./images/copy-icon.png";
+import Loader from "./Loader";
 
 export default class QueryView extends React.Component {
     constructor(props) {
@@ -85,8 +86,8 @@ export default class QueryView extends React.Component {
 
         if (!this.props.errorOccurred) {
             text = text.replaceAll("\\leftouterjoin", '⟕')
-                       .replaceAll('\\rightouterjoin', '⟖')
-                       .replaceAll('\\fullouterjoin', '⟗');
+                .replaceAll('\\rightouterjoin', '⟖')
+                .replaceAll('\\fullouterjoin', '⟗');
 
             const operators = [' \\bowtie ', ' ⟕ ', ' ⟖ ', ' ⟗ ', ' \\rtimes ', ' \\ltimes ', ' \\triangleright ', ' \\triangleleft ',
                 ' \\cap ', ' \\cup ', ' \\setminus ', ' \\div ', ' *_{L} ', ' *_{R} ', ' *_{F} ', ' \\times ', ' \\ltimes ', ' \\rtimes '
@@ -122,23 +123,26 @@ export default class QueryView extends React.Component {
                     {this.props.label}
                 </QueryViewLabel>
                 <StyledQueryView id={`query-view-input-${this.props.isInput}`}>
-                    { (this.props.errorOccurred && !this.props.isInput) ? this.props.content.replaceAll('.', '.\n') : <></>}
+                    {(this.props.errorOccurred && !this.props.isInput) ? this.props.content.replaceAll('.', '.\n') : <></>}
                 </StyledQueryView>
-                { (!this.props.isInput
+                {(!this.props.isInput
                     && this.props.content.length !== 0
                     && !this.props.errorOccurred
                     && this.props.content.slice(0, 2) !== '\\{'
                     && !this.props.formattingEnabled
                 )
                 &&
-                    <>
-                <SideButton onClick={() => this.props.handleMoveToTextEditorButtonClick(this.convertedText)}>
-                    <img src={upArrow} alt='arrow up' />
-                </SideButton>
-                <SideButton onClick={() => window.prompt('Copy:', this.props.content)} marginTop='4em'>
-                    <img src={copyIcon} alt='copy' />
-                </SideButton>
+                <>
+                    <SideButton onClick={() => this.props.handleMoveToTextEditorButtonClick(this.convertedText)}>
+                        <img src={upArrow} alt='arrow up'/>
+                    </SideButton>
+                    <SideButton onClick={() => window.prompt('Copy:', this.props.content)} marginTop='4em'>
+                        <img src={copyIcon} alt='copy'/>
+                    </SideButton>
                 </>}
+                {this.props.isLoading && !this.props.isInput ? (
+                    <Loader />
+                ) : <></>}
             </div>
         );
     }
@@ -146,9 +150,9 @@ export default class QueryView extends React.Component {
 
 const SideButton = styled.div`
   position: absolute;
-  top: ${({ marginTop }) => marginTop ?? '1em'};
+  top: ${({marginTop}) => marginTop ?? '1em'};
   right: 1em;
-  
+
   img {
     cursor: pointer;
     width: 2em;

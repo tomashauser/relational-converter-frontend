@@ -26,6 +26,8 @@ export default class App extends React.Component {
             errorOccurred: false,
             standardChosen: true,
             outputData: [],
+            isLoading: false,
+            justArrived: true,
             formattingEnabled: false,
             schemaInput: defaultSchemaInput,
             switchValues: new Map([['semanticChecking', false], ['formatting', false], ['prenexForm', false]])
@@ -54,6 +56,7 @@ export default class App extends React.Component {
         this.getSchemaInputValues = this.getSchemaInputValues.bind(this);
         this.handleSchemaInputChange = this.handleSchemaInputChange.bind(this);
         this.handleMoveToTextEditorButtonClick = this.handleMoveToTextEditorButtonClick.bind(this);
+        this.showLoaderConditionally = this.showLoaderConditionally.bind(this);
 
         this.latexTextField = React.createRef();
         this.textEditor = React.createRef();
@@ -73,8 +76,18 @@ export default class App extends React.Component {
         });
     }
 
+    showLoaderConditionally() {
+        if (this.state.justArrived) {
+            this.setState({ justArrived: false, isLoading: true });
+        }
+    }
+
     fetchRandomQuery() {
         const address = BASE_URL + 'getRandomQuery';
+
+        this.setState({ isLoading: false });
+
+        this.showLoaderConditionally();
 
         fetch(address)
             .then(r => r.text())
@@ -85,10 +98,18 @@ export default class App extends React.Component {
                 }
 
                 this.textEditor.current.setText(r);
+
+                this.setState({isLoading: false});
             });
     }
 
     fetchConversion(url, data) {
+        url = BASE_URL + url;
+
+        this.setState({ isLoading: false });
+
+        this.showLoaderConditionally();
+
         fetch(url, {
             method: "POST",
             headers: {
@@ -101,7 +122,7 @@ export default class App extends React.Component {
 
             return r;
         }).then(r => r.text()).then(r => {
-            this.setState({apiText: r});
+            this.setState({apiText: r, isLoading: false});
         });
     }
 
@@ -138,7 +159,7 @@ export default class App extends React.Component {
     }
 
     getSchemaInputValues() {
-        let strings = this.state.schemaInput.filter(el => el[0].length !== 0).flatMap(row => row.map(el => el.replace(/ /g, '')));
+        let strings = this.state.schemaInput.filter(el => el[0].length !== 0).flatMap(row => row.map(el => typeof el === 'string' ? el.replace(/ /g, '') : ''));
 
         return strings.map(s => {
             const idxLeftPar = s.indexOf('(');
@@ -193,6 +214,7 @@ export default class App extends React.Component {
                            ref={this.latexTextField}/>
                 <QueryView content={this.state.apiText}
                            isInput={false}
+                           isLoading={this.state.isLoading}
                            formattingEnabled={this.state.switchValues.get('formatting')}
                            errorOccurred={this.state.errorOccurred}
                            handleMoveToTextEditorButtonClick={this.handleMoveToTextEditorButtonClick}

@@ -1,5 +1,13 @@
 import React from 'react';
-import {convertToRaw, Editor, EditorState, getDefaultKeyBinding, Modifier, RichUtils, CompositeDecorator} from 'draft-js';
+import {
+    convertToRaw,
+    Editor,
+    EditorState,
+    getDefaultKeyBinding,
+    Modifier,
+    RichUtils,
+    CompositeDecorator
+} from 'draft-js';
 import 'draft-js/dist/Draft.css';
 import PropTypes from 'prop-types';
 import SavedQuery from "./SavedQuery";
@@ -31,16 +39,8 @@ class RichTextEditor extends React.Component {
             findWithRegex(RA_OPERATORS, contentBlock, callback);
         }
 
-        function LogicalExpressionsStrategy(contentBlock, callback) {
-            findWithRegex(LOGICAL_OPERATORS, contentBlock, callback);
-        }
-
-        const RelationalAlgebraDecorator = ({ children }) => {
-            return <span style={{ color: "purple"}}>{children}</span>;
-        };
-
-        const LogicalOperatorDecorator = ({ children }) => {
-            return <span style={{ color: "#407ee7"}}>{children}</span>;
+        const RelationalAlgebraDecorator = ({children}) => {
+            return <span style={{color: "purple"}}>{children}</span>;
         };
 
         const compositeDecorator =
@@ -48,10 +48,6 @@ class RichTextEditor extends React.Component {
                 {
                     strategy: RelationalAlgebraStrategy,
                     component: RelationalAlgebraDecorator
-                },
-                {
-                    strategy: LogicalExpressionsStrategy,
-                    component: LogicalOperatorDecorator
                 }
             ]);
 
@@ -84,12 +80,6 @@ class RichTextEditor extends React.Component {
 
         this.lastHitKey = 4;
         this.editorRef = React.createRef();
-
-        this.styleMap = {
-            'HIGHLIGHT_OPERATOR': {
-                'backgroundColor': '#faed27',
-            }
-        };
     }
 
     componentDidMount() {
@@ -107,10 +97,6 @@ class RichTextEditor extends React.Component {
 
     _mapKeyToEditorCommand(e) {
         this.lastHitKey = e;
-
-        if (e.keyCode === 39) {
-
-        }
 
         return getDefaultKeyBinding(e);
     }
@@ -298,7 +284,7 @@ const StyledRichTextEditor = styled.div`
   .RichEditor-activeButton {
     color: #5890ff;
   }
-  
+
   .public-DraftEditorPlaceholder-root, .public-DraftEditor-content {
     padding: 15px;
   }
