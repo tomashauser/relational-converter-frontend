@@ -57,6 +57,8 @@ class RichTextEditor extends React.Component {
             savedQueries: JSON.parse(localStorage.getItem('savedQueries')) || []
         };
 
+        this.compositeDecorator = compositeDecorator;
+
         this.focus = () => this.editorRef.current.focus();
         this.onChange = (editorState) => {
             this.setState({editorState});
@@ -123,11 +125,13 @@ class RichTextEditor extends React.Component {
     }
 
     setText(text, cursorOffset = 0) {
-        let newState = this.insertText(text, EditorState.createEmpty(), cursorOffset);
+        console.log('SET TEXT');
+        let newState = this.insertText(text, EditorState.createEmpty(this.compositeDecorator), cursorOffset);
         this.onChange(newState);
     }
 
     insertText(text, editorState, cursorOffset) {
+
         const currentContent = editorState.getCurrentContent(),
             currentSelection = editorState.getSelection();
 
