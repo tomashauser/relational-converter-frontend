@@ -125,7 +125,6 @@ class RichTextEditor extends React.Component {
     }
 
     setText(text, cursorOffset = 0) {
-        console.log('SET TEXT');
         let newState = this.insertText(text, EditorState.createEmpty(this.compositeDecorator), cursorOffset);
         this.onChange(newState);
     }

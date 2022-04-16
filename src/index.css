@@ -29,6 +29,13 @@ button {
     top: -2em;
 }
 
+@media only screen and (max-width: 916px) {
+    .controls-label {
+        position: unset;
+
+    }
+}
+
 .katex-display > .katex {
     white-space: normal
 }

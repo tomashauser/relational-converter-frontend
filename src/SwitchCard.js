@@ -42,8 +42,8 @@ const StyledSwitchCard = styled.div`
   align-items: center;
   color: white;
 
-  .css-12wnr2w-MuiButtonBase-root-MuiCheckbox-root.Mui-checked {
-    color: white;
+  .Mui-checked {
+    color: white !important;
   }
   
   label {

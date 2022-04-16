@@ -47,5 +47,6 @@ const StyledInputSchemaPanel = styled.div`
 
   @media only screen and (max-width: 916px) {
     grid-template-columns: 1fr;
+    grid-template-rows: unset;
   }
 `;
