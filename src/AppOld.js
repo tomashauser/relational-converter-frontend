@@ -1,13 +1,14 @@
-import RichTextEditor from "./RichTextEditor";
 import React from "react";
-import QueryView from "./QueryView";
-import ConvertButtonsPanel from './controls/ConvertButtonsPanel';
-import NotationSwitch from "./controls/NotationSwitch";
-import InputSchemaPanel from "./InputSchemaPanel";
 import styled from "styled-components";
-import SwitchCardPanel from "./SwitchCardPanel";
+import { ConvertButtonsPanel } from './controls/ConvertButtonsPanel';
+import { NotationSwitch } from "./controls/NotationSwitch";
+import { InputSchemaPanel } from "./InputSchemaPanel";
+import { QueryView } from "./QueryView";
+import { RichTextEditor } from "./RichTextEditor";
+import { SwitchCardPanel } from "./SwitchCardPanel";
+import { getContentForConversion, getLatexToSymbolMap } from "./utils";
 
-const BASE_URL = 'https://relational-api.herokuapp.com/';
+const BASE_URL = 'http://localhost:8080/'; //TODO: Dat to jako proxy do config filu
 
 export default class App extends React.Component {
     constructor(props) {
@@ -30,19 +31,10 @@ export default class App extends React.Component {
             justArrived: true,
             formattingEnabled: false,
             schemaInput: defaultSchemaInput,
-            switchValues: new Map([['semanticChecking', false], ['formatting', false], ['prenexForm', false]])
+            switchValues: new Map([['semanticChecking', false], ['formatting', false], ['prenexForm', false]]),
         };
 
-        this.latexConversionMap = [['\\pi', 'π'], ['\\sigma', 'σ'], ['\\rho', 'ρ'],
-            ['\\triangleleft', '◁'], ['\\triangleright', '▷'], ['\\div', '÷'],
-            ['\\times', '⨯'], ['\\bowtie', '⋈'], ['\\leftouterjoin', '⟕'],
-            ['\\rightouterjoin', '⟖'], ['\\fullouterjoin', '⟗'], ['\\ltimes', '⋉'],
-            ['\\rtimes', '⋊'], ['\\langle', '⟨'], ['\\rangle', '⟩'],
-            ['\\cap', '∩'], ['\\cup', '∪'], ['\\setminus', '\\'],
-            ['\\land', '∧'], ['\\lor', '∨'], ['\\geq', '≥'],
-            ['\\leq', '≤'], ['\\lnot', '¬'], ['\\rightarrow', '→'],
-            ['\\neq', '≠']
-        ];
+        this.latexConversionMap = getLatexToSymbolMap();
 
         this.handleTextChange = this.handleTextChange.bind(this);
         this.updateContent = this.updateContent.bind(this);
@@ -57,8 +49,6 @@ export default class App extends React.Component {
         this.handleSchemaInputChange = this.handleSchemaInputChange.bind(this);
         this.handleMoveToTextEditorButtonClick = this.handleMoveToTextEditorButtonClick.bind(this);
         this.showLoaderConditionally = this.showLoaderConditionally.bind(this);
-
-        this.latexTextField = React.createRef();
         this.textEditor = React.createRef();
     }
 
@@ -93,11 +83,11 @@ export default class App extends React.Component {
             .then(r => r.text())
             .then(r => {
 
-                for (let i = 0; i < this.latexConversionMap.length; i++) {
-                    r = r.replaceAll(this.latexConversionMap[i][0], this.latexConversionMap[i][1]);
+                for (const [key, value] of this.latexConversionMap) {
+                    r = r.replaceAll(key, value);
                 }
 
-                this.textEditor.current.setText(r);
+                this.setState({ textEditorContent: r });
 
                 this.setState({isLoading: false});
             });
@@ -129,7 +119,7 @@ export default class App extends React.Component {
     fetchNotationConversion() {
         let data = new Object();
 
-        data.expression = this.latexTextField.current.getContentForConversion();
+        data.expression = getContentForConversion(this.state.textEditorContent);
         data.schema = this.getSchemaInputValues();
         data.options = Object.fromEntries(this.state.switchValues);
 
@@ -141,7 +131,7 @@ export default class App extends React.Component {
     fetchAtomicConversion() {
         let data = new Object();
 
-        data.expression = this.latexTextField.current.getContentForConversion();
+        data.expression = getContentForConversion(this.state.textEditorContent);
         data.schema = this.getSchemaInputValues();
         data.options = Object.fromEntries(this.state.switchValues);
 
@@ -189,11 +179,11 @@ export default class App extends React.Component {
     }
 
     handleMoveToTextEditorButtonClick(text) {
-        for (let i = 0; i < this.latexConversionMap.length; i++) {
-            text = text.replaceAll(this.latexConversionMap[i][0], this.latexConversionMap[i][1]);
+        for (const [key, value] of this.latexConversionMap) {
+            text = text.replaceAll(key, value);
         }
 
-        this.textEditor.current.setText(text);
+        this.setState({ textEditorContent: text });
     }
 
     render() {
@@ -203,28 +193,26 @@ export default class App extends React.Component {
                 <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/dreampulse/computer-modern-web-font/master/fonts.css"/>
                 <div className="text-editor-wrapper">
                     <RichTextEditor handleTextChange={this.handleTextChange}
-                                    fetchRandomQuery={this.fetchRandomQuery}
-                                    ref={this.textEditor}/>
+                                    text={this.state.textEditorContent}
+                                    fetchRandomQuery={this.fetchRandomQuery}/>
                 </div>
                 <QueryView content={this.state.textEditorContent}
                            updateLatexContent={this.updateContent}
                            errorOccurred={this.state.errorOccurred}
                            label='LaTeX input view'
-                           isInput={true}
-                           ref={this.latexTextField}/>
+                           isInput={true}/>
                 <QueryView content={this.state.apiText}
                            isInput={false}
                            isLoading={this.state.isLoading}
                            formattingEnabled={this.state.switchValues.get('formatting')}
                            errorOccurred={this.state.errorOccurred}
                            handleMoveToTextEditorButtonClick={this.handleMoveToTextEditorButtonClick}
-                           latexConversionMap={this.latexConversionMap}
                            label='LaTeX output view'/>
                 <ButtonsAndSchemaSection>
                     <ConvertButtonsWrapper>
                         <label className='controls-label'>Conversion controls</label>
                         <NotationSwitch handleNotationSwitch={this.handleNotationSwitch}/>
-                        <ConvertButtonsPanel textEditorContent={this.state.textEditorContent}
+                        <ConvertButtonsPanel
                                              fetchNotationConversion={this.fetchNotationConversion}
                                              fetchAtomicConversion={this.fetchAtomicConversion}
                                              standardChosen={this.state.standardChosen}

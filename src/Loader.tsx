@@ -1,11 +1,12 @@
 import React from 'react';
-import styled from "styled-components";
+import styled from "styled-components"
 
-export default class Loader extends React.Component {
-    render() {
+export const Loader: React.FC = () => {
         return (
             <StyledLoader>
-                <LoaderText>It may take up to 10 seconds</LoaderText>
+                <LoaderText>
+                    It may take up to 10 seconds
+                </LoaderText>
                 <div className="lds-roller">
                     <div/>
                     <div/>
@@ -19,7 +20,6 @@ export default class Loader extends React.Component {
                 <LoaderText>before the server wakes up.</LoaderText>
             </StyledLoader>
         )
-    }
 }
 
 const StyledLoader = styled.div`
