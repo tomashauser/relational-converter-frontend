@@ -23,7 +23,7 @@ export const SchemaInput = (props: Props) => {
     const inputText = e.target.value;
 
     setInputValue(inputText);
-    setIsWrongInput(!schemaRegex.test(inputText.replace(/\s*/g, "")));
+    setIsWrongInput(!schemaRegex.test(inputText.replace(/\s*/g, "") || (inputText.replaceAll(" ", "").length === 0)));
 
     props.handleChange(props.row, props.col, inputText);
   };

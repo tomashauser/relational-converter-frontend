@@ -8,13 +8,14 @@ type Props = {
 
 export const SaveQueryButton = (props: Props) => {
   return (
-    <StyledSavedQueryButton onClick={() => props.handleSaveClick()}>
+    <StyledSavedQueryButton onClick={() => props.handleSaveClick()} id={'save-query-button'}>
       <SaveIcon src={diskette} className="save-icon" alt="save diskette icon" />
     </StyledSavedQueryButton>
   );
 };
 
-const StyledSavedQueryButton = styled.div`
+const StyledSavedQueryButton = styled.button`
+  padding: 0;
   display: flex;
   position: absolute;
   right: 16px;

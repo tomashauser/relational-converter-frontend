@@ -10,6 +10,8 @@ import { getContentForConversion, getLatexToSymbolMap } from "./utils";
 
 const BASE_URL = "http://localhost:8080/"; //TODO: Dat to jako proxy do config filu
 
+export const MAX_NUM_OF_SAVED_QUERIES = 40;
+
 type Props = {
   className?: string;
 };

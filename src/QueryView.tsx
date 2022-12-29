@@ -111,7 +111,7 @@ export const QueryView = (props: Props) => {
   return (
     <div style={{ position: "relative", whiteSpace: "break-spaces" }}>
       <QueryViewLabel>{props.label}</QueryViewLabel>
-      <StyledQueryView id={`query-view-input-${props.isInput}`}>
+      <StyledQueryView id={`query-view-input-${props.isInput}`} data-error={props.errorOccurred}>
         {props.errorOccurred && !props.isInput ? (
           props.content.replaceAll(".", ".\n")
         ) : (
@@ -128,6 +128,8 @@ export const QueryView = (props: Props) => {
               onClick={() =>
                 props.handleMoveToTextEditorButtonClick(convertedText.current)
               }
+              title='Move to input'
+              id='move-to-input-button'
             >
               <img src={upArrow} alt="arrow up" />
             </SideButton>

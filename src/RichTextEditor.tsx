@@ -16,6 +16,7 @@ import { InputButtonsPanel } from "./controls/InputButtonsPanel";
 import { RandomQueryButton } from "./controls/RandomQueryButton";
 import { SaveQueryButton } from "./controls/SaveQueryButton";
 import { SavedQuery } from "./SavedQuery";
+import { MAX_NUM_OF_SAVED_QUERIES } from "./App";
 
 type Props = {
   handleTextChange: any;
@@ -205,12 +206,14 @@ export const RichTextEditor = (props: Props) => {
   };
 
   const save = () => {
-    if (savedQueries.length <= 40) {
+    if (savedQueries.length < MAX_NUM_OF_SAVED_QUERIES) {
       let newSavedQueries = [...savedQueries, getCurrentText(editorState)]; //TODO: pouzit prev
 
       setSavedQueries(newSavedQueries);
 
       localStorage.setItem("savedQueries", JSON.stringify(newSavedQueries));
+    } else {
+      alert(`You can only save ${MAX_NUM_OF_SAVED_QUERIES} queries.`);
     }
   };
 
@@ -228,7 +231,7 @@ export const RichTextEditor = (props: Props) => {
 
   return (
     <>
-      <SavedQueriesPanel>
+      <SavedQueriesPanel id={'saved-queries-list'}>
         {savedQueries.map((savedQuery, idx) => (
           <SavedQuery
             key={idx} //TODO: Klic index
@@ -244,6 +247,7 @@ export const RichTextEditor = (props: Props) => {
         <SaveQueryButton handleSaveClick={save} handleClearClick={clear} />
         <RandomQueryButton handleClick={props.fetchRandomQuery} />
         <StyledRichTextEditor onClick={focus}>
+          {/* @ts-ignore*/}
           <Editor
             editorState={editorState}
             handleKeyCommand={_handleKeyCommand}

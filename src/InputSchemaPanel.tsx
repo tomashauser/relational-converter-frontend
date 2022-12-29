@@ -10,7 +10,7 @@ type Props = {
 
 export const InputSchemaPanel = (props: Props) => {
   return (
-    <StyledInputSchemaPanel rows={props.rows} columns={props.columns}>
+    <StyledInputSchemaPanel rows={props.rows} columns={props.columns} id='schema-input-panel'>
       <label className="controls-label">Schema</label>
       {[...Array(props.rows).keys()].map((i) =>
         [...Array(props.columns).keys()].map((j) => (

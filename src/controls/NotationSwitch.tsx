@@ -20,6 +20,7 @@ export const NotationSwitch = (props: Props) => {
         variant="contained"
         onClick={() => handleClick(true)}
         data-chosen={isStandardChosen}
+        id='standard-notation-button'
       >
         Standard notation
       </Button>
@@ -27,6 +28,7 @@ export const NotationSwitch = (props: Props) => {
         variant="contained"
         onClick={() => handleClick(false)}
         data-chosen={!isStandardChosen}
+        id='simplified-notation-button'
       >
         Simplified notation
       </Button>

@@ -20,7 +20,10 @@ export const SavedQuery = (props: Props) => {
   const ToolTip = ReactTooltip as unknown as React.FC<any>; // TODO: Udelat vlastni tooltip
 
   return (
-    <StyledSavedQuery onContextMenu={(e) => handleQueryRightClick(e)}>
+    <StyledSavedQuery
+        id={`saved-query-${props.number}`}
+        data-content={props.content}
+        onContextMenu={(e) => handleQueryRightClick(e)}>
       <button
         data-tip
         data-for={`savedQueryTip${props.number}`}

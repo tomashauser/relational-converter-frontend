@@ -7,17 +7,20 @@ type Props = {
 
 export const RandomQueryButton = (props: Props) => {
   return (
-    <StyledRandomQueryButton onClick={() => props.handleClick()}>
+    <StyledRandomQueryButton onClick={() => props.handleClick()}
+                             id='random-query-generation-button'
+                             title='Generate a random RA query'>
       <RandomIcon
         src={shuffleIcon}
         className="save-icon"
-        alt="save diskette icon"
+        alt="random query icon"
       />
     </StyledRandomQueryButton>
   );
 };
 
-const StyledRandomQueryButton = styled.div`
+const StyledRandomQueryButton = styled.button`
+  padding: 0;
   display: flex;
   position: absolute;
   right: 11px;

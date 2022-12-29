@@ -13,12 +13,12 @@ type Props = {
 export const ConvertButtonsPanel = (props: Props) => {
   return (
     <StyledConvertButtonsPanel>
-      <Button variant="contained" onClick={props.fetchNotationConversion}>
+      <Button variant="contained" onClick={props.fetchNotationConversion} id='notation-conversion-button'>
         Convert to{" "}
         {`${props.standardChosen ? "simplified" : "standard"} notation`}
         <HiddenCircle />
       </Button>
-      <Button variant="contained" onClick={props.fetchAtomicConversion}>
+      <Button variant="contained" id='to-trc-conversion-button' onClick={props.fetchAtomicConversion}>
         Convert to TRC
       </Button>
     </StyledConvertButtonsPanel>
