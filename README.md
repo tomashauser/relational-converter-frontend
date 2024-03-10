@@ -1,70 +1,31 @@
-# Getting Started with Create React App
+## General information
+This project serves as a frontend for my [bachelor's thesis](https://dspace.cvut.cz/handle/10467/101022).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The purpose of the application is to provide a way to convert between two widely used relational algebra notations.
 
-## Available Scripts
+Moreover, the tool can also convert queries from relational algebra into relational calculus. You can access the frontend [here on github pages](https://tomashauser.github.io/relational-converter/).
 
-In the project directory, you can run:
+## How to use it
+![screenshot-of-the-frontend-page](https://github.com/tomashauser/relational-converter/assets/37981481/3170a982-0a8c-440d-9d00-131c49975fbd)
 
-### `npm start`
+- Use the input text field to write your query. For subscripts, use LaTeX notation, and for special symbols use the panel above the text field.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- As you type your query it is dynamically being converted into LaTeX.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- In order to save your query, use the floppy disk icon on the right. The query will be saved into local storage. You can save up to 20 queries.
 
-### `npm test`
+- The twisted arrows below the floppy disk icon will generate a random query.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- In the output view, there is an arrow button that will put the output back into the input field and a copy-to-clipboard button.
 
-### `npm run build`
+- Use the conversion controls to switch between the notations and to trigger a conversion.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- In the options part you can enable formatting to increase readability of long queries.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- If you want to convert into relational calculus, you will sometimes to give a schema in the depicted format. You will be notified in the response in case the schema definition is needed.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- The format for the tables in schema is `TableName(ColumnName1, ColumnName2,...)`.
 
-### `npm run eject`
+  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
