@@ -3,7 +3,7 @@ This project serves as a frontend for my [bachelor's thesis](https://dspace.cvut
 
 The purpose of the application is to provide a way to convert between two widely used relational algebra notations.
 
-Moreover, the tool can also convert queries from relational algebra into relational calculus. You can access the it [here](https://tomhauser.dev).
+Moreover, the tool can also convert queries from relational algebra into relational calculus.
 
 ## How to use it
 ![screenshot-of-the-frontend-page](https://github.com/tomashauser/relational-converter/assets/37981481/3170a982-0a8c-440d-9d00-131c49975fbd)
