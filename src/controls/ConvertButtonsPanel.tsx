@@ -63,33 +63,3 @@ const HiddenCircle = styled.span`
   inset: 0;
   border-radius: inherit;
 `;
-
-const ConvertButton = styled.button`
-  cursor: pointer;
-  background: var(--query-view-color);
-  border: none;
-  width: 100%;
-  padding: 0;
-  min-height: var(--convert-button-height);
-  font-size: 1.125rem;
-
-  background-size: 300% 100%;
-  background-image: linear-gradient(
-    to right,
-    #25aae1,
-    #4481eb,
-    #04befe,
-    #3f86ed
-  );
-  box-shadow: 0 2px 2px 0 rgba(65, 132, 234, 0.75);
-  color: white;
-
-  &:hover {
-    background-position: 100% 0;
-  }
-
-  &:active {
-    background: #003b62;
-    color: white;
-  }
-`;

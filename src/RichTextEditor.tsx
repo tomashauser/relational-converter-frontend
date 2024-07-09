@@ -10,7 +10,7 @@ import {
   RichUtils,
 } from "draft-js";
 import "draft-js/dist/Draft.css";
-import { useEffect, useRef, useState } from "react";
+import {useEffect, useRef, useState} from "react";
 import styled from "styled-components";
 import { InputButtonsPanel } from "./controls/InputButtonsPanel";
 import { RandomQueryButton } from "./controls/RandomQueryButton";
@@ -84,9 +84,6 @@ export const RichTextEditor = (props: Props) => {
     )
   );
 
-  const [latexTextFieldContent, setLatexTextFieldContent] =
-    useState<string>("");
-
   const queriesFromStorage = localStorage.getItem("savedQueries");
 
   const [savedQueries, setSavedQueries] = useState<string[]>(
@@ -117,7 +114,7 @@ export const RichTextEditor = (props: Props) => {
     );
 
     setEditorState(newState);
-  }, [props.text]);
+  }, [props.text, compositeDecorator, editorState]);
 
   const _handleKeyCommand = (
     command: any,
@@ -136,10 +133,6 @@ export const RichTextEditor = (props: Props) => {
     lastHitKey.current = e;
 
     return getDefaultKeyBinding(e);
-  };
-
-  const _toggleInlineStyle = (inlineStyle: any) => {
-    onChange(RichUtils.toggleInlineStyle(editorState, inlineStyle));
   };
 
   const handleMouseDown = (symbol: string) => {
