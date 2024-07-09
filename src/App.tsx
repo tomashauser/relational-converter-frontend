@@ -29,13 +29,11 @@ export const App = (props: Props) => {
       );
 
   const [textEditorContent, setTextEditorContent] = useState<string>("");
-  const [latexContent, setLatexContent] = useState<string>("");
   const [apiText, setApiText] = useState<string>("");
   const [errorOccurred, setErrorOccurred] = useState<boolean>(false);
   const [standardChosen, setStandardChosen] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [justArrived, setJustArrived] = useState<boolean>(true);
-  const [formattingEnabled, setFormattingEnabled] = useState<boolean>(false);
   const [schemaInput, setSchemaInput] =
     useState<string[][]>(defaultSchemaInput);
   const [switchValues, setSwitchValues] = useState<Map<string, boolean>>(
@@ -50,11 +48,9 @@ export const App = (props: Props) => {
 
   const handleTextChange = (newTextEditorContent: string) => {
     setTextEditorContent(newTextEditorContent);
-    setLatexContent("");
   };
 
   const updateContent = (newLatexContent: string) => {
-    setLatexContent(newLatexContent);
     setTextEditorContent(newLatexContent);
   };
 
@@ -138,10 +134,6 @@ export const App = (props: Props) => {
 
   const handleNotationSwitch = (standardChosen: boolean) => {
     setStandardChosen(standardChosen);
-  };
-
-  const setFormatting = (newVal: boolean) => {
-    setFormattingEnabled(newVal);
   };
 
   const getSchemaInputValues = () => {
@@ -250,7 +242,6 @@ export const App = (props: Props) => {
         <StyledSwitchCardPanel
           handleSwitch={handleSwitch}
           className={props.className}
-          setFormatting={setFormatting}
         />
         <InputSchemaPanel
           rows={schemaInputRows}
@@ -279,13 +270,6 @@ const ConvertButtonsWrapper = styled.div`
   flex-direction: column;
   gap: var(--convert-button-gap);
   position: relative;
-`;
-
-const Label = styled.label`
-  position: absolute;
-  color: white;
-  font-size: 1.25rem;
-  top: -2em;
 `;
 
 const ButtonsAndSchemaSection = styled.section`

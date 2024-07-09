@@ -5,7 +5,6 @@ import { SwitchCard } from "./SwitchCard";
 type Props = {
   handleSwitch: any;
   className?: string;
-  setFormatting: any;
 };
 
 export const SwitchCardPanel = (props: Props) => {
