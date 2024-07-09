@@ -50,18 +50,18 @@ export const App = (props: Props) => {
 
   const handleTextChange = (newTextEditorContent: string) => {
     setTextEditorContent(newTextEditorContent);
-    setLatexContent(""); // TODO: 2 state updaty, tento tu je jen kvuli rerenderu QueryView
+    setLatexContent("");
   };
 
   const updateContent = (newLatexContent: string) => {
     setLatexContent(newLatexContent);
-    setTextEditorContent(newLatexContent); // TODO: 2 state updaty
+    setTextEditorContent(newLatexContent);
   };
 
   const showLoaderConditionally = () => {
     if (justArrived) {
       setJustArrived(false);
-      setIsLoading(true); // TODO: 2 state updaty
+      setIsLoading(true);
     }
   };
 
@@ -80,7 +80,7 @@ export const App = (props: Props) => {
         }
 
         setTextEditorContent(r);
-        setIsLoading(false); // TODO: 2 state updaty
+        setIsLoading(false);
       });
   };
 
@@ -106,7 +106,7 @@ export const App = (props: Props) => {
       .then((r) => r.text())
       .then((r) => {
         setApiText(r);
-        setIsLoading(false); // TODO: 2 state updaty
+        setIsLoading(false);
       });
   };
 
