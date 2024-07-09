@@ -8,7 +8,7 @@ import { RichTextEditor } from "./RichTextEditor";
 import { SwitchCardPanel } from "./SwitchCardPanel";
 import { getContentForConversion, getLatexToSymbolMap } from "./utils";
 
-const BASE_URL = "http://localhost:8080/"; //TODO: Dat to jako proxy do config filu
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 
 export const MAX_NUM_OF_SAVED_QUERIES = 40;
 
@@ -66,7 +66,7 @@ export const App = (props: Props) => {
   };
 
   const fetchRandomQuery = () => {
-    const address = BASE_URL + "getRandomQuery";
+    const address = BACKEND_URL + "getRandomQuery";
 
     setIsLoading(false);
 
@@ -85,7 +85,7 @@ export const App = (props: Props) => {
   };
 
   const fetchConversion = (url: string, data: any) => {
-    url = BASE_URL + url;
+    url = BACKEND_URL + url;
 
     setIsLoading(false);
 
