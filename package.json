@@ -17,13 +17,13 @@
     "@types/draft-js": "^0.11.9",
     "@types/styled-components": "^5.1.26",
     "draft-js": "^0.11.7",
+    "fp-ts": "^2.16.9",
     "katex": "0.16.10",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-tooltip": "^4.2.21",
     "setimmediate": "^1.0.5",
     "styled-components": "^5.3.3",
-    "fp-ts": "^2.16.9",
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
@@ -31,6 +31,7 @@
     "@eslint/js": "^9.13.0",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.2.21",
+    "@unsplash/ts-namespace-import-plugin": "^1.0.0",
     "@vitejs/plugin-react-swc": "^3.5.0",
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.0.0",

@@ -1,61 +1,58 @@
-export const symbolToLatexMap = new Map([
-  ["π", " \\pi"],
-  ["σ", " \\sigma"],
-  ["ρ", " \\rho"],
-  ["∧", " \\land "],
-  ["∨", " \\lor "],
-  ["¬", " \\lnot "],
-  ["≠", " \\neq "],
-  ["≥", " \\geq "],
-  ["≤", " \\leq "],
-  ["∩", " \\cap "],
-  ["∪", " \\cup "],
-  ["\\", " \\setminus "],
-  ["÷", " \\div "],
-  ["⨯", " \\times "],
-  ["→", " \\rightarrow "],
-  ["◁", " \\triangleleft "],
-  ["▷", " \\triangleright "],
-  ["⋈", " \\bowtie "],
-  ["⟕", " \\leftouterjoin "],
-  ["⟖", " \\rightouterjoin "],
-  ["⟗", " \\fullouterjoin "],
-  ["⋉", " \\ltimes "],
-  ["⋊", " \\rtimes "],
-  ["⟨", "\\langle "],
-  ["⟩", " \\rangle "],
+import * as O from 'fp-ts/Option';
+import * as S from 'fp-ts/String';
+import * as A from 'fp-ts/ReadonlyArray';
+import {flow, pipe} from "fp-ts/function";
+
+const symbolToLatexMap = new Map([
+    ["π", " \\pi"],
+    ["σ", " \\sigma"],
+    ["ρ", " \\rho"],
+    ["∧", " \\land "],
+    ["∨", " \\lor "],
+    ["¬", " \\lnot "],
+    ["≠", " \\neq "],
+    ["≥", " \\geq "],
+    ["≤", " \\leq "],
+    ["∩", " \\cap "],
+    ["∪", " \\cup "],
+    ["\\", " \\setminus "],
+    ["÷", " \\div "],
+    ["⨯", " \\times "],
+    ["→", " \\rightarrow "],
+    ["◁", " \\triangleleft "],
+    ["▷", " \\triangleright "],
+    ["⋈", " \\bowtie "],
+    ["⟕", " \\leftouterjoin "],
+    ["⟖", " \\rightouterjoin "],
+    ["⟗", " \\fullouterjoin "],
+    ["⋉", " \\ltimes "],
+    ["⋊", " \\rtimes "],
+    ["⟨", "\\langle "],
+    ["⟩", " \\rangle "],
 ]);
 
-export const getLatexToSymbolMap = () => {
-  const newEntries: [string, string][] = [];
+const fromCharsToString = (text: readonly string[]) => text.join("");
+const includeLatexDollars = (text: string) => `$$${text}$$`;
+const removeSpaces = (text: string) => text.replaceAll(" ", "");
+export const charToLatex = (char: string): string => symbolToLatexMap.get(char) ?? char;
 
-  symbolToLatexMap.forEach((key, value) => {
-    newEntries.push([key.replaceAll(" ", ""), value]);
-  });
+export const latexToSymbolMap = pipe(
+    symbolToLatexMap,
+    (v) => [...v],
+    A.map(([key, val]) => [removeSpaces(val), key] as const),
+    (v) => new Map(v)
+)
 
-  return new Map(newEntries);
-};
+export const getContentForConversion = flow(
+    S.split(""),
+    A.map(charToLatex),
+    fromCharsToString,
+    includeLatexDollars,
+    S.replace(/[\u200B-\u200D\uFEFF]/g, "")
+)
 
-export const getContentForConversion = (text: string) => {
-  if (text == null || text.length === 0) {
-    return "";
-  }
-
-  text = text
-    .split("")
-    .map((char) => charToLatex(char))
-    .join("")
-    .replace(/[\u200B-\u200D\uFEFF]/g, "");
-
-  text = "$$" + text + "$$";
-
-  return text;
-};
-
-export const charToLatex = (char: string) => {
-  if (symbolToLatexMap.has(char)) {
-    return symbolToLatexMap.get(char);
-  }
-
-  return char;
-};
+export const replaceLatexSymbols = (text: string): string =>
+    pipe(
+        [...latexToSymbolMap],
+        A.reduce(text, (acc, [key, value]) => acc.replaceAll(key, value))
+    );

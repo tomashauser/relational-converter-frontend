@@ -7,33 +7,33 @@ type Props = {
 };
 
 export const NotationSwitch = (props: Props) => {
-  const [isStandardChosen, setIsStandardChosen] = useState<boolean>(true);
+    const [isStandardChosen, setIsStandardChosen] = useState<boolean>(true);
 
-  const handleClick = (standardChosen: boolean) => {
-    setIsStandardChosen(standardChosen);
-    props.handleNotationSwitch(standardChosen);
-  };
+    const handleClick = (standardChosen: boolean) => {
+        setIsStandardChosen(standardChosen);
+        props.handleNotationSwitch(standardChosen);
+    };
 
-  return (
-    <StyledNotationSwitch>
-      <Button
-        variant="contained"
-        onClick={() => handleClick(true)}
-        data-chosen={isStandardChosen}
-        id='standard-notation-button'
-      >
+    return (
+        <StyledNotationSwitch>
+            <Button
+                variant="contained"
+                onClick={() => handleClick(true)}
+                data-chosen={isStandardChosen}
+                id='standard-notation-button'
+            >
         Standard notation
-      </Button>
-      <Button
-        variant="contained"
-        onClick={() => handleClick(false)}
-        data-chosen={!isStandardChosen}
-        id='simplified-notation-button'
-      >
+            </Button>
+            <Button
+                variant="contained"
+                onClick={() => handleClick(false)}
+                data-chosen={!isStandardChosen}
+                id='simplified-notation-button'
+            >
         Simplified notation
-      </Button>
-    </StyledNotationSwitch>
-  );
+            </Button>
+        </StyledNotationSwitch>
+    );
 };
 
 const StyledNotationSwitch = styled.div`

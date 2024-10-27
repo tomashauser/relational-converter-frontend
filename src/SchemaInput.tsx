@@ -11,31 +11,31 @@ type Props = {
 };
 
 export const SchemaInput = (props: Props) => {
-  const [inputValue, setInputValue] = useState<string>();
-  const [isWrongInput, setIsWrongInput] = useState<boolean>();
+    const [inputValue, setInputValue] = useState<string>();
+    const [isWrongInput, setIsWrongInput] = useState<boolean>();
 
-  const identifierRegex = "[a-zA-Z][a-zA-Z0-9_-]*";
-  const schemaRegex = new RegExp(
-    `^$|(^${identifierRegex}\\(${identifierRegex}(,${identifierRegex})*\\)$)`
-  );
+    const identifierRegex = "[a-zA-Z][a-zA-Z0-9_-]*";
+    const schemaRegex = new RegExp(
+        `^$|(^${identifierRegex}\\(${identifierRegex}(,${identifierRegex})*\\)$)`
+    );
 
-  const handleChange = (e: any) => {
-    const inputText = e.target.value;
+    const handleChange = (e: any) => {
+        const inputText = e.target.value;
 
-    setInputValue(inputText);
-    setIsWrongInput(!schemaRegex.test(inputText.replace(/\s*/g, "") || (inputText.replaceAll(" ", "").length === 0)));
+        setInputValue(inputText);
+        setIsWrongInput(!schemaRegex.test(inputText.replace(/\s*/g, "") || (inputText.replaceAll(" ", "").length === 0)));
 
-    props.handleChange(props.row, props.col, inputText);
-  };
+        props.handleChange(props.row, props.col, inputText);
+    };
 
-  return (
-    <StyledSchemaInput
-      placeholder={"Table(column1, column2,...)"}
-      value={inputValue}
-      onChange={handleChange}
-      data-wrong-input={isWrongInput}
-    />
-  );
+    return (
+        <StyledSchemaInput
+            placeholder={"Table(column1, column2,...)"}
+            value={inputValue}
+            onChange={handleChange}
+            data-wrong-input={isWrongInput}
+        />
+    );
 };
 
 const StyledSchemaInput = styled.input`

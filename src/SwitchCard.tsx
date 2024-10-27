@@ -9,22 +9,22 @@ type Props = {
 };
 
 export const SwitchCard = (props: Props) => {
-  const handleSwitch = (e: any) =>
-    props.handleSwitch(props.name, e.target.checked);
+    const handleSwitch = (e: any) =>
+        props.handleSwitch(props.name, e.target.checked);
 
-  const label = { inputProps: { "aria-label": "Toggle " + props.label } };
+    const label = { inputProps: { "aria-label": "Toggle " + props.label } };
 
-  return (
-    <StyledSwitchCard>
-      <label htmlFor={props.name}>{props.label}</label>
-      <Checkbox
-        id={props.name}
-        {...label}
-        defaultChecked={props.defaultChecked}
-        onChange={handleSwitch}
-      />
-    </StyledSwitchCard>
-  );
+    return (
+        <StyledSwitchCard>
+            <label htmlFor={props.name}>{props.label}</label>
+            <Checkbox
+                id={props.name}
+                {...label}
+                defaultChecked={props.defaultChecked}
+                onChange={handleSwitch}
+            />
+        </StyledSwitchCard>
+    );
 };
 
 const StyledSwitchCard = styled.div`

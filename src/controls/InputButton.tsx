@@ -7,21 +7,21 @@ type Props = {
 };
 
 export const InputButton = (props: Props) => {
-  const handleMouseDown = (e: any) => {
-    e.preventDefault();
-    props.handleMouseDown(props.symbol);
-  };
+    const handleMouseDown = (e: any) => {
+        e.preventDefault();
+        props.handleMouseDown(props.symbol);
+    };
 
-  return (
-    <StyledInputButton
-      onMouseDown={handleMouseDown}
-      data-tip
-      data-for={props.tooltipId}
-      className="control-button"
-    >
-      {props.symbol}
-    </StyledInputButton>
-  );
+    return (
+        <StyledInputButton
+            onMouseDown={handleMouseDown}
+            data-tip
+            data-for={props.tooltipId}
+            className="control-button"
+        >
+            {props.symbol}
+        </StyledInputButton>
+    );
 };
 
 const StyledInputButton = styled.button`

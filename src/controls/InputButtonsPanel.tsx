@@ -8,62 +8,62 @@ type Props = {
 };
 
 export const InputButtonsPanel = (props: Props) => {
-  const ToolTip = ReactTooltip as unknown as React.FC<any>;
-  const inputButtonSymbols = [
-    ["π", "Pi", "π_{r}(R)"],
-    ["σ", "Sigma", "σ_{r = 4}(R)"],
-    ["ρ", "Rho", "ρ_{s / r}(R)"],
-    ["⋈", "naturalJoin", "R ⋈ S or R ⋈_{x = y} S"],
-    ["⟕", "", ""],
-    ["⟖", "", ""],
-    ["⟗", "", ""],
-    ["⋉", "leftSemiJoin", "R ⋉ S or R ⋉_{x = y} S"],
-    ["⋊", "rightSemiJoin", "R ⋊ S or R ⋊_{x = y} S"],
-    ["▷", "", ""],
-    ["∧", "", ""],
-    ["∨", "", ""],
-    ["¬", "", ""],
-    ["≥", "", ""],
-    ["≤", "", ""],
-    ["∩", "", ""],
-    ["∪", "", ""],
-    ["\\", "", ""],
-    ["÷", "", ""],
-    ["⨯", "", ""],
-    ["÷", "", ""],
-    ["→", "renamingArrow", "R⟨r → S⟩"],
-    ["*", "", ""],
-    ["⟨", "leftAngle", "R⟨r = 4]S"],
-    ["⟩", "rightAngle", "R[r = 4⟩S"],
-  ];
+    const ToolTip = ReactTooltip as unknown as React.FC<any>;
+    const inputButtonSymbols = [
+        ["π", "Pi", "π_{r}(R)"],
+        ["σ", "Sigma", "σ_{r = 4}(R)"],
+        ["ρ", "Rho", "ρ_{s / r}(R)"],
+        ["⋈", "naturalJoin", "R ⋈ S or R ⋈_{x = y} S"],
+        ["⟕", "", ""],
+        ["⟖", "", ""],
+        ["⟗", "", ""],
+        ["⋉", "leftSemiJoin", "R ⋉ S or R ⋉_{x = y} S"],
+        ["⋊", "rightSemiJoin", "R ⋊ S or R ⋊_{x = y} S"],
+        ["▷", "", ""],
+        ["∧", "", ""],
+        ["∨", "", ""],
+        ["¬", "", ""],
+        ["≥", "", ""],
+        ["≤", "", ""],
+        ["∩", "", ""],
+        ["∪", "", ""],
+        ["\\", "", ""],
+        ["÷", "", ""],
+        ["⨯", "", ""],
+        ["÷", "", ""],
+        ["→", "renamingArrow", "R⟨r → S⟩"],
+        ["*", "", ""],
+        ["⟨", "leftAngle", "R⟨r = 4]S"],
+        ["⟩", "rightAngle", "R[r = 4⟩S"],
+    ];
 
-  return (
-    <StyledInputButtonsPanelWrapper>
-      <StyledInputButtonsPanel>
-        {inputButtonSymbols.map(([symbol, tipId, content], idx) => (
-          <>
-            <InputButton
-              symbol={symbol}
-              tooltipId={`usageTip${tipId}`}
-              handleMouseDown={props.handleMouseDown}
-            />
-            {tipId !== "" ? (
-              <ToolTip
-                id={`usageTip${tipId}`}
-                place="left"
-                effect="solid"
-                key={tipId + "-" + idx}
-              >
-                {content}
-              </ToolTip>
-            ) : (
-              <></>
-            )}
-          </>
-        ))}
-      </StyledInputButtonsPanel>
-    </StyledInputButtonsPanelWrapper>
-  );
+    return (
+        <StyledInputButtonsPanelWrapper>
+            <StyledInputButtonsPanel>
+                {inputButtonSymbols.map(([symbol, tipId, content], idx) => (
+                    <>
+                        <InputButton
+                            symbol={symbol}
+                            tooltipId={`usageTip${tipId}`}
+                            handleMouseDown={props.handleMouseDown}
+                        />
+                        {tipId !== "" ? (
+                            <ToolTip
+                                id={`usageTip${tipId}`}
+                                place="left"
+                                effect="solid"
+                                key={tipId + "-" + idx}
+                            >
+                                {content}
+                            </ToolTip>
+                        ) : (
+                            <></>
+                        )}
+                    </>
+                ))}
+            </StyledInputButtonsPanel>
+        </StyledInputButtonsPanelWrapper>
+    );
 };
 
 const StyledInputButtonsPanelWrapper = styled.div`

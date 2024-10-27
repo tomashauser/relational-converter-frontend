@@ -2,24 +2,24 @@ import React from 'react';
 import styled from "styled-components"
 
 export const Loader: React.FC = () => {
-        return (
-            <StyledLoader>
-                <LoaderText>
+    return (
+        <StyledLoader>
+            <LoaderText>
                     It may take up to 10 seconds
-                </LoaderText>
-                <div className="lds-roller">
-                    <div/>
-                    <div/>
-                    <div/>
-                    <div/>
-                    <div/>
-                    <div/>
-                    <div/>
-                    <div/>
-                </div>
-                <LoaderText>before the server wakes up.</LoaderText>
-            </StyledLoader>
-        )
+            </LoaderText>
+            <div className="lds-roller">
+                <div/>
+                <div/>
+                <div/>
+                <div/>
+                <div/>
+                <div/>
+                <div/>
+                <div/>
+            </div>
+            <LoaderText>before the server wakes up.</LoaderText>
+        </StyledLoader>
+    )
 }
 
 const StyledLoader = styled.div`

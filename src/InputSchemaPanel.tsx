@@ -9,24 +9,24 @@ type Props = {
 };
 
 export const InputSchemaPanel = (props: Props) => {
-  return (
-    <StyledInputSchemaPanel rows={props.rows} columns={props.columns} id='schema-input-panel'>
-      <label className="controls-label">Schema</label>
-      {[...Array(props.rows).keys()].map((i) =>
-        [...Array(props.columns).keys()].map((j) => (
-          <SchemaInput
-            key={`schema-input-${i}-${j}`} //TODO: Indexy jako klice
-            row={i}
-            col={j}
-            defaultValue={props.defaultValues[i][j]}
-            handleChange={props.handleChange}
-            number={i}
-            name={`simple-text-input-${i}`}
-          />
-        ))
-      )}
-    </StyledInputSchemaPanel>
-  );
+    return (
+        <StyledInputSchemaPanel rows={props.rows} columns={props.columns} id='schema-input-panel'>
+            <label className="controls-label">Schema</label>
+            {[...Array(props.rows).keys()].map((i) =>
+                [...Array(props.columns).keys()].map((j) => (
+                    <SchemaInput
+                        key={`schema-input-${i}-${j}`}
+                        row={i}
+                        col={j}
+                        defaultValue={props.defaultValues[i][j]}
+                        handleChange={props.handleChange}
+                        number={i}
+                        name={`simple-text-input-${i}`}
+                    />
+                ))
+            )}
+        </StyledInputSchemaPanel>
+    );
 };
 
 const StyledInputSchemaPanel = styled.div<{ rows: number; columns: number }>`
