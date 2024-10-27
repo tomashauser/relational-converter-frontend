@@ -8,7 +8,7 @@ import { RichTextEditor } from "./RichTextEditor";
 import { SwitchCardPanel } from "./SwitchCardPanel";
 import { getContentForConversion, getLatexToSymbolMap } from "./utils";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
+const BACKEND_URL = import.meta.env.VITE_REACT_APP_BACKEND_URL;
 
 export const MAX_NUM_OF_SAVED_QUERIES = 40;
 

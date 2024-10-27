@@ -114,7 +114,7 @@ export const RichTextEditor = (props: Props) => {
     );
 
     setEditorState(newState);
-  }, [props.text, compositeDecorator, editorState]);
+  }, []);
 
   const _handleKeyCommand = (
     command: any,
@@ -240,7 +240,6 @@ export const RichTextEditor = (props: Props) => {
         <SaveQueryButton handleSaveClick={save} handleClearClick={clear} />
         <RandomQueryButton handleClick={props.fetchRandomQuery} />
         <StyledRichTextEditor onClick={focus}>
-          {/* @ts-ignore*/}
           <Editor
             editorState={editorState}
             handleKeyCommand={_handleKeyCommand}
